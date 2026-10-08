@@ -1,4 +1,3 @@
-# int64_t max3(int64_t x, int64_t y, int64_t z)
 # x86-64, syntaxe AT&T, convention System V: x -> %rdi, y -> %rsi, z -> %rdx,
 # résultat dans %rax. Indice: cmp puis cmovl/cmovg (déplacement conditionnel).
 
@@ -9,12 +8,21 @@
 #endif
 
     .text
-    .globl C(max3)
-C(max3):
+    .globl C(fib)
+C(fib):
     # TODO
-    mov %rdi, %rax
-    cmp %rdi, %rsi
-    cmovg %rsi, %rax
-    cmp %rax, %rdx
-    cmovg %rdx, %rax
+    # mov %rdi, %rax
+    mov %rdi, %rbp
+    mov $0, %rax
+    mov $1, %rdx
+
+
+    start_loop:
+    mov %rdx, %rsi
+    add %rax, %rdx
+    mov %rsi, %rax
+
+    sub $1, %rbp
+    cmp $0, %rbp
+    jg start_loop
     ret

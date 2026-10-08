@@ -9,12 +9,25 @@
 #endif
 
     .text
-    .globl C(max3)
-C(max3):
+    .globl C(gcd)
+C(gcd):
     # TODO
+    loop_start:
+
+    cmp %rsi, %rdi
+    je end_loop
+    jg rdi_bigger
+
+    sub %rdi, %rsi
+    jmp loop_start
+
+    rdi_bigger:
+    sub %rsi, %rdi
+
+
+    cmp %rsi, %rdi
+    jne loop_start
+
+    end_loop:
     mov %rdi, %rax
-    cmp %rdi, %rsi
-    cmovg %rsi, %rax
-    cmp %rax, %rdx
-    cmovg %rdx, %rax
     ret
